@@ -1,3 +1,7 @@
+/**
+ * Code forked from iohook
+ * Edited version (for FireSong)
+*/
 'use strict';
 const EventEmitter = require('events');
 const path = require('path');

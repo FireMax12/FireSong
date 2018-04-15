@@ -1,3 +1,7 @@
+/**
+ * Copyright © 2018.
+ * FireSong is the work of David Csizmadia <firemax12b@gmail.com>, Milan Szekely <szekelymilan1125@gmail.com>
+*/
 'use strict';
 
 const {app, BrowserWindow, globalShortcut} = require('electron');
@@ -39,9 +43,13 @@ app.on('ready', () => {
       return win.webContents.goForward();
   });
 
-  // Start / Stop video with bindings
-  const binding = ioHook.registerShortcut([29, 57], (keys) => { // Bind Ctrl + Space
+  // Keybindings
+  const startStop = ioHook.registerShortcut([29, 57], (keys) => { // Bind Ctrl + Space
     sendInput('\u004B'); // Send 'K' key for YouTube
+  });
+
+  const reloadPage = ioHook.registerShortcut([63], (keys) => { // Bind F5
+    win.webContents.reloadIgnoringCache(); // Reload page
   });
    
   ioHook.start();
