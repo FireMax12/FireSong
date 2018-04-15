@@ -1,0 +1,44 @@
+{
+  "name": "FireSong",
+  "version": "1.0.0",
+  "description": "FireSong written by David Csizmadia and Milan Szekely",
+  "main": "src/main.js",
+  "scripts": {
+    "postinstall": "electron-rebuild",
+    "start": "electron ./"
+  },
+  "author": "David Csizmadia <firemax12b@gmail.com>, Milan Szekely <szekelymilan1125@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FireMax12/FireSong.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FireMax12/FireSong/issues"
+  },
+  "homepage": "https://github.com/FireMax12/FireSong#readme",
+  "dependencies": {
+    "electron": "1.8.4",
+    "electron-rebuild": "1.7.3",
+    "iohook": "0.1.15"
+  },
+  "iohook": {
+    "targets": [
+      "node-59",
+      "electron-57"
+    ],
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "arches": [
+      "x64",
+      "ia32"
+    ]
+  },
+  "cmake-js": {
+    "runtime": "electron",
+    "runtimeVersion": "1.8.4"
+  }
+}
