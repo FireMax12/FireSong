@@ -1,7 +1,7 @@
 'use strict';
 
 const {app, BrowserWindow, globalShortcut} = require('electron');
-const ioHook = require('iohook');
+const ioHook = require('./iohook');
 const pack = require('../package.json');
 
 app.on('ready', () => {
