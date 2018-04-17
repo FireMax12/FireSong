@@ -45,11 +45,14 @@ app.on('ready', () => {
 
   // Keybindings
   const startStop = ioHook.registerShortcut([29, 57], (keys) => { // Bind Ctrl + Space
-    sendInput('\u004B'); // Send 'K' key for YouTube
+    return sendInput('\u004B'); // Send 'K' key for YouTube
   });
 
   const reloadPage = ioHook.registerShortcut([63], (keys) => { // Bind F5
-    win.webContents.reloadIgnoringCache(); // Reload page
+    if (!win)
+      return;
+    if (win.isFocused())
+      return win.webContents.reloadIgnoringCache(); // Reload page
   });
    
   ioHook.start();
