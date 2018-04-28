@@ -37,10 +37,12 @@ app.on('ready', () => {
   ioHook.on('mouseup', (event) => {
     if (!win)
       return;
-    if (event.button == 4 && win.isFocused())
-      return win.webContents.goBack();
-    if (event.button == 5 && win.isFocused())
-      return win.webContents.goForward();
+    if(win.isFocused()){
+      if (event.button == 4)
+        return win.webContents.goBack();
+      if (event.button == 5)
+        return win.webContents.goForward();
+    }
   });
 
   // Keybindings
