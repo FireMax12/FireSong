@@ -29,5 +29,5 @@ or simply run `start.vbs`.
 ## Keybinds
 * **mouse4** - Go back
 * **mouse5** - Go forward
-* **Ctrl + Space** - Start/Stop music _(It also works, when the main window is minimized!)_
+* **Ctrl + Space** - Start/Stop music _(It also works when the main window is minimized.)_
 * **F5** - Reload page
