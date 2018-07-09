@@ -1,0 +1,76 @@
+div#offline {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #292d2f;
+  color: #e0e0e0;
+}
+
+div#online {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #e0e0e0;
+  color: #292d2f;
+}
+
+div.choose {
+  pointer-events: none;
+  transition: all 0.8s;
+}
+
+div.choose div.option {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+div.option img {
+  max-width: 40vmin;
+  max-height: 40vmin;
+  margin-top: -10vmin;
+  padding: 5vmin 0;
+}
+
+button {
+  display: inline-block;
+  padding: 8px 16px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  transition: all 0.5s;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.5s;
+  pointer-events: auto;
+}
+
+button:hover {
+  transform: scale(1.2,1.2);
+  -webkit-transform: scale(1.2,1.2);
+  -moz-transform: scale(1.2,1.2);
+}
+
+div#offline button {
+  background-color: #e0e0e0;
+  color: #292d2f;
+  border: solid #e0e0e0 2px;
+}
+
+div#online button {
+  background-color: #292d2f;
+  color: #e0e0e0;
+  border: solid #292d2f 2px;
+}
+
+div.choose:hover {
+  -moz-box-shadow:    inset 0 0 60px #71027e;
+  -webkit-box-shadow: inset 0 0 60px #71027e;
+  box-shadow:         inset 0 0 60px #71027e;
+}

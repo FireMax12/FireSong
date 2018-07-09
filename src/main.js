@@ -9,7 +9,7 @@ const ioHook = require('./iohook');
 const pack = require('../package.json');
 
 app.on('ready', () => {
-  let win = new BrowserWindow({width: 1600, height: 900, icon: __dirname + '/../static/icon.png', title: pack.name});
+  let win = new BrowserWindow({ width: 1600, height: 900, icon: `${__dirname}//icon.png`, title: pack.name });
   win.setMenu(null);
 
   win.on('closed', () => {
@@ -26,7 +26,7 @@ app.on('ready', () => {
     win.loadURL(url);
   });
 
-  win.loadURL('https://www.youtube.com');
+  win.loadURL(`file://${__dirname}/index.htm`);
 
   const sendInput = (key) => {
     win.webContents.sendInputEvent({ type: 'keyDown', keyCode: key });
