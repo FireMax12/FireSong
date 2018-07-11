@@ -8,6 +8,8 @@ const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const ioHook = require('./iohook');
 const pack = require('../package.json');
 
+app.setAppUserModelId('com.firemax12.firesong');
+
 app.on('ready', () => {
   let win = new BrowserWindow({ width: 1600, height: 900, icon: `${__dirname}/icon.png`, title: pack.name });
   win.setMenu(null);
@@ -70,6 +72,10 @@ app.on('ready', () => {
   });
 
   ioHook.start();
+});
+
+app.on('window-all-closed', () => {
+  app.quit();
 });
 
 app.on('before-quit', () => {

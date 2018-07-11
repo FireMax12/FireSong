@@ -18,9 +18,12 @@
   },
   "homepage": "https://github.com/FireMax12/FireSong#readme",
   "dependencies": {
+    "iohook": "0.1.15"
+  },
+  "devDependencies": {
     "electron": "1.8.4",
     "electron-rebuild": "1.7.3",
-    "iohook": "0.1.15"
+    "electron-builder": "^20.19.2"
   },
   "iohook": {
     "targets": [
@@ -40,5 +43,26 @@
   "cmake-js": {
     "runtime": "electron",
     "runtimeVersion": "1.8.4"
+  },
+  "build": {
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "createDesktopShortcut": true,
+      "installerIcon": "static/icon.ico",
+      "uninstallerIcon": "static/icon.ico",
+      "license": "LICENSE"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "static/icon.ico",
+      "publisherName": "David Csizmadia, Milan Szekely"
+    },
+    "appId": "com.firemax12.firesong",
+    "productName": "FireSong",
+    "copyright": "David Csizmadia 2017"
   }
 }
