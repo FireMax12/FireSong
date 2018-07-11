@@ -1,6 +1,6 @@
 {
   "name": "FireSong",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "FireSong has written by David Csizmadia and Milan Szekely.",
   "main": "src/main.js",
   "scripts": {

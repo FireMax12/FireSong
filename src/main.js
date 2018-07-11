@@ -4,12 +4,12 @@
 */
 'use strict';
 
-const {app, BrowserWindow, globalShortcut} = require('electron');
+const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const ioHook = require('./iohook');
 const pack = require('../package.json');
 
 app.on('ready', () => {
-  let win = new BrowserWindow({ width: 1600, height: 900, icon: `${__dirname}//icon.png`, title: pack.name });
+  let win = new BrowserWindow({ width: 1600, height: 900, icon: `${__dirname}/icon.png`, title: pack.name });
   win.setMenu(null);
 
   win.on('closed', () => {
@@ -26,16 +26,21 @@ app.on('ready', () => {
     win.loadURL(url);
   });
 
+  let YouTubeState = false;
   win.loadURL(`file://${__dirname}/index.htm`);
 
-  const sendInput = (key) => {
+  ipcMain.on('changeYouTubeState', (event, state) => {
+    YouTubeState = state;
+  });
+
+  const sendInput = key => {
     win.webContents.sendInputEvent({ type: 'keyDown', keyCode: key });
     win.webContents.sendInputEvent({ type: 'keyUp', keyCode: key });
   };
 
   // Go back, Go forward bindings
-  ioHook.on('mouseup', (event) => {
-    if (!win)
+  ioHook.on('mouseup', event => {
+    if (!win || !YouTubeState)
       return;
     if (event.button == 4 && win.isFocused())
       return win.webContents.goBack();
@@ -44,17 +49,26 @@ app.on('ready', () => {
   });
 
   // Keybindings
-  const startStop = ioHook.registerShortcut([29, 57], (keys) => { // Bind Ctrl + Space
+  const startStop = ioHook.registerShortcut([29, 57], keys => { // Bind Ctrl + Space
+    if (!win || !YouTubeState)
+      return;
     return sendInput('\u004B'); // Send 'K' key for YouTube
   });
 
-  const reloadPage = ioHook.registerShortcut([63], (keys) => { // Bind F5
-    if (!win)
+  const reloadPage = ioHook.registerShortcut([63], keys => { // Bind F5
+    if (!win || !YouTubeState)
       return;
     if (win.isFocused())
       return win.webContents.reloadIgnoringCache(); // Reload page
   });
-   
+  
+  const saveMusic = ioHook.registerShortcut([29, 31], keys => {
+    if (!win || !YouTubeState)
+      return;
+    if (win.isFocused())
+      return save(win.webContents.getURL());
+  });
+
   ioHook.start();
 });
 
@@ -62,3 +76,7 @@ app.on('before-quit', () => {
   ioHook.unload();
   ioHook.stop();
 });
+
+function save(url) {
+  console.log(`Saving has been triggered for: ${url}`);
+}

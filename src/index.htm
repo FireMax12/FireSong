@@ -9,19 +9,31 @@
 
   <!-- stylesheet -->
   <link href="style.css" rel="stylesheet" type="text/css">
+
+  <!-- script -->
+  <script type="text/javascript">
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.send('changeYouTubeState', false);
+
+    const changeUrl = (url, stateChange) => {
+      if (stateChange)
+        ipcRenderer.send('changeYouTubeState', true);
+      window.location.href = url;
+    };
+  </script>
 </head>
 
 <body>
   <div id="offline" class="choose">
     <div class="option">
       <img src="assets/offline.png"><br>
-      <button onclick="window.location.href = 'offline/index.htm';">Offline</button>
+      <button onclick="changeUrl('offline/index.htm');">Offline</button>
     </div>
   </div>
   <div id="online" class="choose">
     <div class="option">
       <img src="assets/online.png"><br>
-      <button onclick="window.location.href = 'https://youtu.be';">Online</button>
+      <button onclick="changeUrl('https://youtu.be', true);">Online</button>
     </div>
   </div>
 </body>
