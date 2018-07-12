@@ -10,23 +10,24 @@
   <img src="https://img.shields.io/github/license/FireMax12/FireSong.svg" />
 </p>
 
+Prebuilt version is available on the 'Releases' tab.
+
+# Building
+
 ## Requirements
-* Python 3.5.x or newer
+* Python 2
+* Python 3
+* node-gyp
 * node.js 9.x or newer
 
-## Installation
+## Windows
 ```bash
 npm --add-python-to-path='true' --debug install --global windows-build-tools
 npm install
+npx electron-builder
 ```
 
-## Usage
-```bash
-npm start
-```
-or simply run `start.vbs`.
-
-## Keybinds
+# Keybinds
 * **mouse4** - Go back
 * **mouse5** - Go forward
 * **Ctrl + Space** - Start/Stop music _(It also works when the main window is minimized.)_

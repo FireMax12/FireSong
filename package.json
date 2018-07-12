@@ -1,7 +1,7 @@
 {
   "name": "FireSong",
-  "version": "1.0.3",
-  "description": "FireSong has written by David Csizmadia and Milan Szekely.",
+  "version": "1.0.4",
+  "description": "FireSong is a YouTube music player powered by Electron.",
   "main": "src/main.js",
   "scripts": {
     "postinstall": "electron-rebuild",
