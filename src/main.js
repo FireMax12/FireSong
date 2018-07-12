@@ -5,10 +5,12 @@
 'use strict';
 
 const { app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
+const { autoUpdater } = require('electron-updater');
 const ioHook = require('./iohook');
 const pack = require('../package.json');
 
 app.setAppUserModelId('com.firemax12.firesong');
+autoUpdater.checkForUpdatesAndNotify();
 
 app.on('ready', () => {
   let win = new BrowserWindow({ width: 1600, height: 900, icon: `${__dirname}/icon.png`, title: pack.name });

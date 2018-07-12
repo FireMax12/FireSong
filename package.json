@@ -1,10 +1,10 @@
 {
   "name": "FireSong",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "FireSong is a YouTube music player powered by Electron.",
   "main": "src/main.js",
   "scripts": {
-    "postinstall": "electron-rebuild",
+    "postinstall": "electron-builder install-app-deps",
     "start": "electron ./"
   },
   "author": "David Csizmadia <firemax12b@gmail.com>, Milan Szekely <szekelymilan1125@gmail.com>",
@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "electron": "1.8.4",
-    "electron-rebuild": "1.7.3",
-    "electron-builder": "^20.19.2"
+    "electron-builder": "^20.19.2",
+    "electron-updater": "^2.23.3"
   },
   "iohook": {
     "targets": [
@@ -71,6 +71,14 @@
     },
     "appId": "com.firemax12.firesong",
     "productName": "FireSong",
-    "copyright": "David Csizmadia 2017"
+    "copyright": "David Csizmadia 2017",
+    "publish": {
+      "provider": "github",
+      "repo": "FireSong",
+      "owner": "FireMax12",
+      "vPrefixedTagName": true,
+      "host": "github.com",
+      "protocol": "https"
+    }
   }
 }
