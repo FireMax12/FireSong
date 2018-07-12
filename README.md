@@ -12,22 +12,22 @@
 
 Prebuilt version is available on the 'Releases' tab.
 
-# Building
+## Building
 
-## Requirements
+### Requirements
 * Python 2
 * Python 3
 * node-gyp
 * node.js 9.x or newer
 
-## Windows
+### Windows
 ```bash
 npm --add-python-to-path='true' --debug install --global windows-build-tools
 npm install
 npx electron-builder
 ```
 
-# Keybinds
+## Keybinds
 * **mouse4** - Go back
 * **mouse5** - Go forward
 * **Ctrl + Space** - Start/Stop music _(It also works when the main window is minimized.)_

@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/FireMax12/FireSong#readme",
   "dependencies": {
-    "iohook": "0.1.15",
-    "electron-updater": "^2.23.3"
+    "electron-updater": "^2.23.3",
+    "iohook": "0.1.15"
   },
   "devDependencies": {
     "electron": "1.8.4",
