@@ -83,3 +83,47 @@ div.choose:hover {
   -webkit-box-shadow: inset 0 0 60px #71027e;
   box-shadow:         inset 0 0 60px #71027e;
 }
+
+webview#main {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: white;
+}
+
+#infobox {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 240px;
+  height: 48px;
+  background-color: rgba(0,0,0,0.6);
+  border: 1px solid rgba(0,0,0,0.8);
+  border-radius: 8px 8px 4px 4px;
+  font-family: 'Open Sans', sans-serif;
+  color: rgba(255,255,255,0.8);
+  z-index: 99;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+#infobox span#title {
+  position: absolute;
+  left: 0px;
+  top: 2px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#infobox span#desc {
+  position: absolute;
+  left: 4px;
+  top: 25px;
+  width: calc(100% - 8px);
+  font-size: 14px;
+}

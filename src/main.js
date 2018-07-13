@@ -20,57 +20,41 @@ app.on('ready', () => {
     win = null;
   });
 
-  win.on('page-title-updated', (event, title) => {
-    event.preventDefault();
+  ipcMain.on('newTitle', (event, title) => {
     win.setTitle(`${pack.name} v${pack.version} | ${title}`);
   });
 
-  win.webContents.on('new-window', (event, url) => {
-    event.preventDefault();
-    win.loadURL(url);
-  });
-
-  let YouTubeState = false;
   win.loadURL(`file://${__dirname}/index.htm`);
-
-  ipcMain.on('changeYouTubeState', (event, state) => {
-    YouTubeState = state;
-  });
-
-  const sendInput = key => {
-    win.webContents.sendInputEvent({ type: 'keyDown', keyCode: key });
-    win.webContents.sendInputEvent({ type: 'keyUp', keyCode: key });
-  };
 
   // Go back, Go forward bindings
   ioHook.on('mouseup', event => {
-    if (!win || !YouTubeState)
+    if (!win)
       return;
     if (event.button == 4 && win.isFocused())
-      return win.webContents.goBack();
+      return win.webContents.send('go', 'back');
     if (event.button == 5 && win.isFocused())
-      return win.webContents.goForward();
+      return win.webContents.send('go', 'forward');
   });
 
   // Keybindings
   const startStop = ioHook.registerShortcut([29, 57], keys => { // Bind Ctrl + Space
-    if (!win || !YouTubeState)
+    if (!win)
       return;
-    return sendInput('\u004B'); // Send 'K' key for YouTube
+    return win.webContents.send('startStop'); // Start/Stop music
   });
 
   const reloadPage = ioHook.registerShortcut([63], keys => { // Bind F5
-    if (!win || !YouTubeState)
+    if (!win)
       return;
     if (win.isFocused())
-      return win.webContents.reloadIgnoringCache(); // Reload page
+      return win.webContents.send('reload'); // Reload page
   });
   
   const saveMusic = ioHook.registerShortcut([29, 31], keys => {
-    if (!win || !YouTubeState)
+    if (!win)
       return;
     if (win.isFocused())
-      return save(win.webContents.getURL());
+      return win.webContents.send('save');
   });
 
   ioHook.start();
@@ -84,7 +68,3 @@ app.on('before-quit', () => {
   ioHook.unload();
   ioHook.stop();
 });
-
-function save(url) {
-  console.log(`Saving has been triggered for: ${url}`);
-}

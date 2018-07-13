@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title> <!-- empty title -->
+  <title>FireSong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font(s) -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:700|Open+Sans:300" rel="stylesheet">
 
   <!-- stylesheet -->
   <link href="style.css" rel="stylesheet" type="text/css">
@@ -13,13 +13,67 @@
   <!-- script -->
   <script type="text/javascript">
     const { ipcRenderer } = require('electron');
-    ipcRenderer.send('changeYouTubeState', false);
+    let online;
 
-    const changeUrl = (url, stateChange) => {
-      if (stateChange)
-        ipcRenderer.send('changeYouTubeState', true);
-      window.location.href = url;
+    const changeUrl = (url, state) => {
+      online = state;
+      const webview = document.getElementById('main');
+      webview.src = url;
+      webview.style.display = 'inline-flex';
     };
+
+    window.onload = () => {
+      const webview = document.getElementById('main');
+      webview.addEventListener('page-title-updated', event => {
+        ipcRenderer.send('newTitle', event.title);
+      });
+      webview.addEventListener('new-window', event => {
+        webview.loadURL(event.url);
+      });
+    };
+
+    ipcRenderer.on('startStop', (event) => {
+      const webview = document.getElementById('main');
+      if (webview.style.display == 'none')
+        return;
+      if (online) {
+        webview.sendInputEvent({ type: 'keyDown', keyCode: '\u004B' });
+        webview.sendInputEvent({ type: 'keyUp', keyCode: '\u004B' });
+      }
+    });
+
+    ipcRenderer.on('go', (event, type) => {
+      const webview = document.getElementById('main');
+      if (webview.style.display == 'none')
+        return;
+      if (type == 'back')
+        return webview.goBack();
+      if (type == 'forward')
+        return webview.goForward();
+    });
+
+    ipcRenderer.on('reload', event => {
+      const webview = document.getElementById('main');
+      if (webview.style.display == 'none')
+        return;
+      webview.reloadIgnoringCache();
+    });
+
+    ipcRenderer.on('save', event => {
+      if (!online)
+        return;
+      showInfo('Saving', 'Downloading has been started.');
+    });
+
+    function showInfo(title_value, desc_value) {
+      const infobox = document.getElementById('infobox');
+      const title = document.getElementById('title');
+      const desc = document.getElementById('desc');
+      title.innerHTML = title_value;
+      desc.innerHTML = desc_value;
+      infobox.style.opacity = '1';
+      setTimeout(() => { infobox.style.opacity = '0'; }, 2000);
+    }
   </script>
 </head>
 
@@ -35,6 +89,11 @@
       <img src="assets/online.png"><br>
       <button onclick="changeUrl('https://youtu.be', true);">Online</button>
     </div>
+  </div>
+  <webview id="main"></webview>
+  <div id="infobox">
+    <span id="title"></span>
+    <span id="desc"></span>
   </div>
 </body>
 </html>
