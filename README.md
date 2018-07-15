@@ -28,7 +28,8 @@ npx electron-builder
 ```
 
 ## Keybinds
-* **mouse4** - Go back
-* **mouse5** - Go forward
-* **Ctrl + Space** - Start/Stop music _(It also works when the main window is minimized.)_
-* **F5** - Reload page
+* **mouse4** - Go back _(on focus)_
+* **mouse5** - Go forward _(on focus)_
+* **F5** - Reload page _(on focus)_
+* **Ctrl + Space** - Start/Stop music
+* **Ctrl + Shift + N** - Play next music (skip)

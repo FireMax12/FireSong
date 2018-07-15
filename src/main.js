@@ -49,12 +49,18 @@ app.on('ready', () => {
     if (win.isFocused())
       return win.webContents.send('reload'); // Reload page
   });
-  
-  const saveMusic = ioHook.registerShortcut([29, 31], keys => {
+
+  const saveMusic = ioHook.registerShortcut([29, 31], keys => { // Bind Ctrl + S
     if (!win)
       return;
     if (win.isFocused())
       return win.webContents.send('save');
+  });
+
+  const nextMusic = ioHook.registerShortcut([29, 42, 49], keys => { // Bind Ctrl + Shift + N
+    if (!win)
+      return;
+    return win.webContents.send('next');
   });
 
   ioHook.start();

@@ -65,6 +65,16 @@
       showInfo('Saving', 'Downloading has been started.');
     });
 
+    ipcRenderer.on('next', event => {
+      const webview = document.getElementById('main');
+      if (webview.style.display == 'none')
+        return;
+      if (online) {
+        webview.sendInputEvent({ type: 'keyDown', keyCode: '\u004E', modifiers: ['shift'] });
+        webview.sendInputEvent({ type: 'keyUp', keyCode: '\u004E', modifiers: ['shift'] });
+      }
+    });
+
     function showInfo(title_value, desc_value) {
       const infobox = document.getElementById('infobox');
       const title = document.getElementById('title');
